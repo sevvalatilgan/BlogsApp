@@ -8,9 +8,17 @@
 
   <ItemGroup>
     <Compile Remove="Templates\**" />
+    <Compile Remove="Views\BlogTags\**" />
     <Content Remove="Templates\**" />
+    <Content Remove="Views\BlogTags\**" />
     <EmbeddedResource Remove="Templates\**" />
+    <EmbeddedResource Remove="Views\BlogTags\**" />
     <None Remove="Templates\**" />
+    <None Remove="Views\BlogTags\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\BlogTagsController.cs" />
   </ItemGroup>
 
   <ItemGroup>

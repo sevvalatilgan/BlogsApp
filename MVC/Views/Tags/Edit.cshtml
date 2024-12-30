@@ -38,15 +38,15 @@
         </div>
 
 @* Can be uncommented and used for many to many relationships. {Entity} may be replaced with the related entiy name in the controller and views. *@
-        @*
+        
         <div class="row mb-3">
-            <label asp-for="{Entity}Ids" class="col-2 col-form-label fw-bold"></label>
+            <label asp-for="BlogIds" class="col-2 col-form-label fw-bold"></label>
 	        <div class="col-10">
-		        <select multiple asp-for="{Entity}Ids" class="form-select" asp-items="ViewBag.{Entity}Ids"></select>
-		        <span asp-validation-for="{Entity}Ids" class="text-danger"></span>
+		        <select multiple asp-for="BlogIds" class="form-select" asp-items="ViewBag.BlogIds"></select>
+		        <span asp-validation-for="BlogIds" class="text-danger"></span>
 	        </div>
         </div>
-        *@
+       
 
         <hr />
         <div class="row mb-3">
@@ -62,4 +62,7 @@
         </div>
     </form>
 </div>
+}
+@section Scripts {
+    <partial name="_DateTimePicker" />
 }

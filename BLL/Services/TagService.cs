@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public interface ITagService 
+    public interface ITagService
     {
         public IQueryable<TagModel> Query();
 
@@ -19,12 +19,14 @@ namespace BLL.Services
 
         public ServiceBase Update(Tag record);
 
-
         public ServiceBase Delete(int id);
 
     }
 
-    public class TagService : ServiceBase,ITagService
+    public class TagService : ServiceBase, ITagService
+
+
+    // public class TagService : ServiceBase, IService<Tag,TagModel>
     {
         public TagService(Db db) : base(db)
         {
@@ -35,7 +37,7 @@ namespace BLL.Services
             if (_db.Tags.Any(t => t.Name.ToUpper() == record.Name.ToUpper().Trim()))
                 return Error("Tags with the same name exists!");
             record.Name = record.Name?.Trim();
-            _db.Tags.Add(record);   
+            _db.Tags.Add(record);
             _db.SaveChanges();
             return Success("Tags created succesfully.");
         }
@@ -47,6 +49,7 @@ namespace BLL.Services
                 return Error("Tags cannot be found!");
             if (entity.BlogTags.Any())
                 return Error("Tags has relational blogs!");
+            _db.BlogTags.RemoveRange(entity.BlogTags);
             _db.Tags.Remove(entity);
             _db.SaveChanges();
             return Success("Tags deleted succesfully.");
@@ -54,7 +57,7 @@ namespace BLL.Services
 
         public IQueryable<TagModel> Query()
         {
-            return _db.Tags.OrderBy(t => t.Name).Select(t => new TagModel() { Record = t });
+            return _db.Tags.Include(t => t.BlogTags).ThenInclude(bt => bt.Blog).OrderBy(t => t.Name).Select(t => new TagModel() { Record = t });
         }
 
         public ServiceBase Update(Tag record)

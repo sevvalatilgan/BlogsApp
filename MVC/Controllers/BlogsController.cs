@@ -54,12 +54,12 @@ namespace MVC.Controllers
         }
 
         protected void SetViewData()
-        {
-            // Related items service logic to set ViewData (Record.Id and Name parameters may need to be changed in the SelectList constructor according to the model):
-            ViewData["UserId"] = new SelectList(_userService.Query().ToList(), "Record.Id", "Name");
+        { 
+               // Related items service logic to set ViewData (Record.Id and Name parameters may need to be changed in the SelectList constructor according to the model):
+           ViewData["UserId"] = new SelectList(_userService.Query().ToList(), "Record.Id", "UserName");
             
-            /* Can be uncommented and used for many to many relationships. {Entity} may be replaced with the related entiy name in the controller and views. */
-            //ViewBag.{Entity}Ids = new MultiSelectList(_{Entity}Service.Query().ToList(), "Record.Id", "Name");
+               /* Can be uncommented and used for many to many relationships. {Entity} may be replaced with the related entiy name in the controller and views. */
+              //ViewBag.{Entity}Ids = new MultiSelectList(_{Entity}Service.Query().ToList(), "Record.Id", "Name");
         }
 
         // GET: Blogs/Create
